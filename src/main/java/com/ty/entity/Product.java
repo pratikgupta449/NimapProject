@@ -20,12 +20,12 @@ public class Product {
     private Double price;
     private String Description;
 
-    // Many Products can belong to one Category
+   
     @ManyToOne
-    @JoinColumn(name = "category_id") // Foreign key to Category
+    @JoinColumn(name = "category_id") 
     private Category category;
 
-    // Getters and Setters
+    
     
 }
 
