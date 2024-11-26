@@ -15,22 +15,22 @@ public class ProductService {
 	@Autowired
 	private ProductRepo productRepository;
 
-	// Get all categories with pagination
+	
 	public Iterable<Product> getAllCategories(int page) {
 		return productRepository.findAll(PageRequest.of(page, 10)); // Page size of 10
 	}
 
-	// Create a new Product
+	
 	public Product createProduct(Product Product) {
 		return productRepository.save(Product);
 	}
 
-	// Get Product by ID
+	
 	public Optional<Product> getProductById(Integer id) {
 		return productRepository.findById(id);
 	}
 
-	// Update Product by ID
+	
 	public Object updateProduct(Integer id, Product Product) {
 		Optional<Product> existingProduct = productRepository.findById(id);
 		if (existingProduct.isPresent()) {
@@ -40,7 +40,7 @@ public class ProductService {
 		return null;
 	}
 
-	// Delete Product by ID
+	
 	public boolean deleteProduct(Integer id) {
 		if (productRepository.existsById(id)) {
 			productRepository.deleteById(id);
