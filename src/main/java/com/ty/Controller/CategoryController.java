@@ -26,20 +26,20 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    // GET all categories with pagination
+    
     @GetMapping
     public ResponseEntity<Iterable<Category>> getAllCategories(@RequestParam(defaultValue = "0") int page) {
         return new ResponseEntity<>(categoryService.getAllCategories(page), HttpStatus.OK);
     }
 
-    // POST - Create a new category
+    
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         Category createdCategory = categoryService.createCategory(category);
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
 
-    // GET category by ID
+   
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable("id") Long id) {
         Optional<Category> category = categoryService.getCategoryById(id);
@@ -49,7 +49,7 @@ public class CategoryController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // PUT - Update category by ID
+    
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable("id") Long id, @RequestBody Category category) {
         Category updatedCategory = (Category) categoryService.updateCategory(id, category);
@@ -59,7 +59,7 @@ public class CategoryController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // DELETE - Delete category by ID
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
         if (categoryService.deleteCategory(id)) {
