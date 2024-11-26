@@ -18,12 +18,11 @@ public class Category{
 	private Long id;
 	private String name;
 	
-	  // One Category can have many Products
+	 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    
     private List<Product> products;
 
-	// Getters and Setters
+	
 
 	
 }
