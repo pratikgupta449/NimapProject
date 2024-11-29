@@ -1,5 +1,8 @@
 package com.ty.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
+//@JsonPropertyOrder({"id", "name", "price", "description", "category"}) // Specify the order here
 public class Product {
 
     @Id
@@ -20,12 +24,13 @@ public class Product {
     private Double price;
     private String Description;
 
-   
+    // Many Products can belong to one Category
     @ManyToOne
-    @JoinColumn(name = "category_id") 
+    @JoinColumn(name = "category_id") // Foreign key to Category
+    @JsonIgnoreProperties("products") // Prevents infinite recursion
     private Category category;
 
-    
+    // Getters and Setters
     
 }
 

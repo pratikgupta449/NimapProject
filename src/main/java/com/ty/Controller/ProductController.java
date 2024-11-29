@@ -26,18 +26,19 @@ public class ProductController {
 
     
     @GetMapping
-    public ResponseEntity<Iterable<Product>> getAllProducts(@RequestParam(defaultValue = "0") int page) {
-        return new ResponseEntity<>(productService.getAllCategories(page), HttpStatus.OK);
+    public ResponseEntity<Iterable<Product>> getAllProducts(@RequestParam(defaultValue = "0") int pageNumber,
+                                                            @RequestParam(defaultValue = "10") int NoOfData) {
+        return new ResponseEntity<>(productService.getAllCategories(pageNumber,NoOfData), HttpStatus.OK);
     }
 
-    
+    // POST - Create a new category
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product createdProduct = productService.createProduct(product);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
-   
+    // GET category by ID
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Integer id) {
         Optional<Product> product = productService.getProductById(id);
@@ -47,7 +48,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-   
+    // PUT - Update category by ID
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") Integer id, @RequestBody Product product) {
     	Product updatedProduct = (Product) productService.updateProduct(id, product);
@@ -57,7 +58,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-   
+    // DELETE - Delete category by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") Integer id) {
         if (productService.deleteProduct(id)) {
